@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                    <h1 style="text-align:center;">Modify Questions</h1>
+            </div>
+            <div class="col-lg-12">
+                <table class="table table-border" id="tblResult">
+                 <thead>
+                     <tr>
+                         <th>Question No.</th>
+                         <th>Question</th>
+                         <th>Option1</th>
+                         <th>Option2</th>
+                         <th>Option3</th>
+                         <th>Option4</th>
+                         <th>Correct Option</th>
+                         <th></th>
+                         <th></th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <% for(var i=0;i< questions.length;i++){%>
+                     <tr>
+                         <td><%= questions[i].question_no%></td>
+                         <td><%= questions[i].question%></td>
+                         <td><%= questions[i].option1%></td>
+                         <td><%= questions[i].option2%></td>
+                         <td><%= questions[i].option3%></td>
+                         <td><%= questions[i].option4%></td>
+                         <td><%= questions[i].correct_option%></td>
+                         <td><a href="Modify" type="button" class="btn btn-info">Modify</a></td>
+                         <td><a href="delete/" type="button" class="btn btn-danger">Delete</a></td>
+                     </tr>
+                     <% } %>
+                 </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   <script src="/javascripts/startExam.js"></script>
+</body>
+</html>
