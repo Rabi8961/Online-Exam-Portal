@@ -129,6 +129,36 @@ router.get('/ModifyQuestion', function(req, res) {
           }
         });
 });
+
+router.post('/updateQuestions', function (req, res) {
+  var question = req.body.question;
+  var questionNo = req.body.questionNo;
+  Questions.updateOne({ question_no: questionNo }, { $set: question }, function (err, result) {
+    if (err)
+    {
+      console.log(err);
+      res.send({ 'err': err });
+    }
+    else
+    {
+      res.send({ 'success': result });
+    }
+  });
+});
+
+router.post('/deleteQuestions', function (req, res) {
+  var questionNo = req.body.questionNo;
+  Questions.remove({ question_no: questionNo }, function (err, result) {
+    if (err) {
+      console.log(err);
+      res.send({ 'err': err });
+    }
+    else {
+      res.send({ 'success': result });
+    }
+  });
+});
+
 router.get('/logout', function(req, res) {
   req.session.destroy(function(err){
    if(err){
@@ -146,7 +176,6 @@ router.get('/delete', function(req, res) {
   res.render("/modifyQuestions");
 });
 router.get('/modify', function(req, res) {
-   
   res.render("/");
 });
 router.post('/AddQuestion', function(req, res) {
@@ -199,9 +228,35 @@ router.post('/addStudent', function (req, res) {
 });
 
 
-router.get('/setExamQuestions', function(req, res) {
-  res.render('SetQuestions');
+router.get('/setExamQuestions', function (req, res) {
+  Questions.find({}, { _id: 0, question_no:1},function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // console.log(result);
+      var question_no = 0;
+      if (result.length > 0)
+      {
+        for (var i = 0; i < result.length; i++)
+        {
+          if (Number(result[i].question_no) > question_no)
+          {
+            question_no = Number(result[i].question_no);
+          }
+        }
+        question_no += 1;
+        res.render('SetQuestions', { 'lastQuestionNo': question_no});
+      }
+      else
+      {
+        question_no += 1;
+        res.render('SetQuestions', { 'lastQuestionNo': question_no });
+        }
+    }
+  });
 });
+
 router.get('/seeResult', function(req, res) {
   res.render('seeResult');
 });

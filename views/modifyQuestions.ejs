@@ -8,14 +8,34 @@
         <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .option
+        {
+            width:80px;
+        }
+        .correctOptionSelect
+        {
+            width: 50px;
+            height: 25px;
+        }
+        .questionInput
+        {
+            height: 100px;
+            width: 200px;
+        }
+        td.question{
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                    <h1 style="text-align:center;">Modify Questions</h1>
+                <h1 style="text-align:center;">Modify Questions</h1>
             </div>
             <div class="col-lg-12">
+                <a href="setExamQuestions" type="button" class="btn btn-primary pull-right">Add Question</a>
                 <table class="table table-border" id="tblResult">
                  <thead>
                      <tr>
@@ -33,15 +53,16 @@
                  <tbody>
                      <% for(var i=0;i< questions.length;i++){%>
                      <tr>
-                         <td><%= questions[i].question_no%></td>
-                         <td><%= questions[i].question%></td>
-                         <td><%= questions[i].option1%></td>
-                         <td><%= questions[i].option2%></td>
-                         <td><%= questions[i].option3%></td>
-                         <td><%= questions[i].option4%></td>
-                         <td><%= questions[i].correct_option%></td>
-                         <td><a href="Modify" type="button" class="btn btn-info">Modify</a></td>
-                         <td><a href="delete/" type="button" class="btn btn-danger">Delete</a></td>
+                         <td class="questionNo"><%= questions[i].question_no %></td>
+                         <td class="question"><%= questions[i].question%></td>
+                         <td class="option1"><%= questions[i].option1%></td>
+                         <td class="option2"><%= questions[i].option2%></td>
+                         <td class="option3"><%= questions[i].option3%></td>
+                         <td class="option4"><%= questions[i].option4%></td>
+                         <td class="correctOption"><%= questions[i].correct_option%></td>
+                         <td><button type="button" class="btn btn-info modify">Modify</button>
+                        <button type="button" class="btn btn-info update hide">Update</button></td>
+                         <td><button type="button" class="btn btn-danger delete">Delete</button></td>
                      </tr>
                      <% } %>
                  </tbody>
@@ -50,5 +71,6 @@
         </div>
     </div>
    <script src="/javascripts/startExam.js"></script>
+    <script src="/javascripts/modifyQuestions.js"></script>
 </body>
 </html>
